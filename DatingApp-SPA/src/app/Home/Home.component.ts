@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './Home.component.html',
   styleUrls: ['./Home.component.css']
 })
+
 export class HomeComponent implements OnInit {
   registerMode = false;
   constructor(private http: HttpClient) { }
@@ -22,7 +23,6 @@ export class HomeComponent implements OnInit {
   registerToggle(){
     this.registerMode = true;
   }
-  
     // tslint:disable-next-line: typedef
     cancelRegisterMode(registerMode: boolean) {
       this.registerMode = registerMode;
