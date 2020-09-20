@@ -15,9 +15,10 @@ constructor(
   canActivate(): boolean{
     if (this.authService.loggedIn()){
       return true;
+    } else {
+      this.alertify.error('You shall not pass!!!');
+      this.router.navigate(['/home']);
+      return false;
     }
-    this.alertify.error('You shall not pass!!!');
-    this.router.navigate(['/home']);
-    return false;
   }
 }
