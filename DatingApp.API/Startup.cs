@@ -42,9 +42,10 @@ namespace DatingApp.API
                 });
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("Defaultconnection")));
             services.AddCors();
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper(typeof(DatingRepository).Assembly);
             services.AddTransient<Seed>();
-            services.AddScoped<IAuthRepository, AutoRepository>();
+            services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IDatingRepository, DatingRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options=>{
