@@ -13,8 +13,6 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace DatingApp.API.Controllers
 {
-
-
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
@@ -22,7 +20,6 @@ namespace DatingApp.API.Controllers
         private readonly IAuthRepository _repo;
         private readonly IConfiguration _config;
         private readonly IMapper _mapper;
-
         public AuthController(IAuthRepository repo, IConfiguration config, IMapper mapper)
         {
             _mapper = mapper;
@@ -31,29 +28,31 @@ namespace DatingApp.API.Controllers
         }
 
         [HttpPost("register")]
-
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
-            //validate request 
-
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
 
             if (await _repo.UserExists(userForRegisterDto.Username))
-                return BadRequest("Username already Exists");
+                return BadRequest("Username already exists");
 
-            var UserToCreate = new User
+            var userToCreate = _mapper.Map<User>(userForRegisterDto);
+
+            var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
+
+            var userToReturn = _mapper.Map<UserForDetailedDto>(createdUser);
+
+            return CreatedAtRoute("GetUser", new
             {
-                Username = userForRegisterDto.Username
-            };
-            var CreatedUSer = await _repo.Register(UserToCreate, userForRegisterDto.Password);
-
-            return StatusCode(201);
-
+                controller = "Users",
+                id = createdUser.Id
+            }, userToReturn);
         }
+
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
-            var userFromRepo = await _repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
+            var userFromRepo = await _repo.Login(userForLoginDto.Username
+                .ToLower(), userForLoginDto.Password);
 
             if (userFromRepo == null)
                 return Unauthorized();
@@ -74,8 +73,11 @@ namespace DatingApp.API.Controllers
                 Expires = DateTime.Now.AddDays(1),
                 SigningCredentials = creds
             };
+
             var tokenHandler = new JwtSecurityTokenHandler();
+
             var token = tokenHandler.CreateToken(tokenDescriptor);
+
             var user = _mapper.Map<UserForListDto>(userFromRepo);
 
             return Ok(new
@@ -83,8 +85,6 @@ namespace DatingApp.API.Controllers
                 token = tokenHandler.WriteToken(token),
                 user
             });
-
         }
-
     }
 }

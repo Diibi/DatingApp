@@ -22,11 +22,11 @@ export class MemberListComponent implements OnInit {
   }
 
   // tslint:disable-next-line: typedef
-  loadUsers() {
-    this.userService.getUsers().subscribe((users: User[]) => {
-      this.users = users;
-    }, error => {
-      this.alertify.error(error);
-    });
-  }
+  // loadUsers() {
+  //   this.userService.getUsers().subscribe((users: User[]) => {
+  //     this.users = users;
+  //   }, error => {
+  //     this.alertify.error(error);
+  //   });
+  // }
 }
