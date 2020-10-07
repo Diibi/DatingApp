@@ -10,7 +10,8 @@ import { BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { FileUploadModule } from 'ng2-file-upload';
-//import { TimeAgoPipe } from 'time-ago-pipe';
+import { Pipe, PipeTransform } from '@angular/core';
+import { TimeAgoPipe } from 'time-ago-pipe';
 
 import { AppComponent } from '../src/app/app.component';
 import { HomeComponent } from '../src/app/Home/Home.component';
@@ -57,6 +58,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
       MemberDetailComponent,
       MemberEditComponent,
       PhotoEditorComponent,
+      TimeAgoPipe
 
    ],
   imports: [

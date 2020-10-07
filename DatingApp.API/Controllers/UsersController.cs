@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DatingApp.API.Controllers
 {
-    // [ServiceFilter(typeof(LogUserActivity))]
+    [ServiceFilter(typeof(LogUserActivity))]
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
@@ -90,18 +90,18 @@ namespace DatingApp.API.Controllers
         //     if (await _repo.GetUser(recipientId) == null)
         //         return NotFound();
 
-        //     // like = new Like
-        //     // {
-        //     //     LikerId = id,
-        //     //     LikeeId = recipientId
-        //     // };
+            // like = new Like
+            // {
+            //     LikerId = id,
+            //     LikeeId = recipientId
+            // };
 
-        //     // _repo.Add<Like>(like);
+            // _repo.Add<Like>(like);
 
-        //     // if (await _repo.SaveAll())
-        //     //     return Ok();
+            // if (await _repo.SaveAll())
+            //     return Ok();
 
-        //     // return BadRequest("Failed to like user");
-        // }
+            // return BadRequest("Failed to like user");
+        //}
     }
 }
