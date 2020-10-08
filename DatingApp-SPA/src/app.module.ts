@@ -7,8 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { BsDropdownModule} from 'ngx-bootstrap/dropdown';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { FileUploadModule } from 'ng2-file-upload';
 import { Pipe, PipeTransform } from '@angular/core';
 import { TimeAgoPipe } from 'time-ago-pipe';
@@ -33,6 +35,7 @@ import { MemberEditComponent } from '../src/app/members/member-edit/member-edit.
 import { MemberEditResolver } from '../src/app/_resolvers/member-edit.resolver';
 import { PreventUnsavedChanges } from '../src/app/_gurads/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from '../src/app/members/photo-editor/photo-editor.component';
+import { PaginatedResult } from './app/_models/pagination';
 
 
 export function tokenGetter(){
@@ -69,7 +72,9 @@ export class CustomHammerConfig extends HammerGestureConfig {
     ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    PaginationModule.forRoot(),
     TabsModule.forRoot(),
+    ButtonsModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     NgxGalleryModule,
     FileUploadModule,
