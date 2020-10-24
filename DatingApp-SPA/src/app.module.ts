@@ -12,7 +12,6 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { FileUploadModule } from 'ng2-file-upload';
-import { Pipe, PipeTransform } from '@angular/core';
 import { TimeAgoPipe } from 'time-ago-pipe';
 
 import { AppComponent } from '../src/app/app.component';
@@ -35,6 +34,7 @@ import { MemberEditComponent } from '../src/app/members/member-edit/member-edit.
 import { MemberEditResolver } from '../src/app/_resolvers/member-edit.resolver';
 import { PreventUnsavedChanges } from '../src/app/_gurads/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from '../src/app/members/photo-editor/photo-editor.component';
+import { ListsResolver } from '../src/app/_resolvers/lists.resolver';
 import { PaginatedResult } from './app/_models/pagination';
 
 
@@ -97,9 +97,11 @@ export class CustomHammerConfig extends HammerGestureConfig {
     MemberListResolver,
     MemberDetailResolver,
     MemberEditResolver,
+    ListsResolver,
     PreventUnsavedChanges,
     {provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig}
   ],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }
